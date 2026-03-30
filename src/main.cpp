@@ -1,5 +1,6 @@
 #include "01/day01.hpp"
 #include "02/day02.hpp"
+#include "03/day03.hpp"
 #include <fstream>
 #include <functional>
 #include <iostream>
@@ -14,10 +15,8 @@ using Solver = std::function<int(const std::string &)>;
 // Maps day nr + part nr to a function so that we dont need
 // an endless if/switch statement
 std::map<std::pair<int, int>, Solver> solvers = {
-    {{1, 1}, day01_part1},
-    {{1, 2}, day01_part2},
-    {{2, 1}, day02_part1},
-    {{2, 2}, day02_part2},
+    {{1, 1}, day01_part1}, {{1, 2}, day01_part2}, {{2, 1}, day02_part1},
+    {{2, 2}, day02_part2}, {{3, 1}, day03_part1}, {{3, 2}, day03_part2},
 };
 
 std::string read_file(const std::string &path) {
