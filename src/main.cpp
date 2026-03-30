@@ -1,4 +1,5 @@
 #include "01/day01.hpp"
+#include "02/day02.hpp"
 #include <fstream>
 #include <functional>
 #include <iostream>
@@ -15,6 +16,8 @@ using Solver = std::function<int(const std::string &)>;
 std::map<std::pair<int, int>, Solver> solvers = {
     {{1, 1}, day01_part1},
     {{1, 2}, day01_part2},
+    {{2, 1}, day02_part1},
+    {{2, 2}, day02_part2},
 };
 
 std::string read_file(const std::string &path) {
@@ -44,7 +47,7 @@ int main(int argc, char **argv) {
                                                  example ? "_example" : "");
             std::string input = read_file(input_path);
             int result = solvers[key](input);
-            std::cout << result << "\n";
+            std::cout << "Puzzle output: " << result << "\n";
         } else {
             std::cerr << "Unknown day/part\n";
         }
