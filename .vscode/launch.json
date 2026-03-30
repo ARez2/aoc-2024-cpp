@@ -1,0 +1,50 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug AoC",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/aoc",
+            "args": [
+                "${input:day}",
+                "${input:part}",
+                "${input:exampleFlag}"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty printing",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build",
+        }
+    ],
+    "inputs": [
+        {
+            "id": "day",
+            "type": "promptString",
+            "description": "Day"
+        },
+        {
+            "id": "part",
+            "type": "promptString",
+            "description": "Part"
+        },
+        {
+            "id": "exampleFlag",
+            "type": "pickString",
+            "description": "Use example input?",
+            "options": [
+                "",
+                "--example"
+            ],
+            "default": "--example"
+        }
+    ]
+}
