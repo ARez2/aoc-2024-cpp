@@ -37,12 +37,12 @@ int main(int argc, char **argv) {
         int day = std::stoi(argv[1]);
         int part = std::stoi(argv[2]);
         bool example = (argc > 3 && std::string(argv[3]) == "--example");
-        std::string input_path = std::format("inputs/day{:02}{}.txt", day,
-                                             example ? "_example" : "");
-        std::string input = read_file(input_path);
 
         std::pair<int, int> key = std::make_pair(day, part);
-        if (solvers.count(key) > 0) {
+        if (day >= 1 && solvers.count(key) > 0) {
+            std::string input_path = std::format("inputs/day{:02}{}.txt", day,
+                                                 example ? "_example" : "");
+            std::string input = read_file(input_path);
             int result = solvers[key](input);
             std::cout << result << "\n";
         } else {

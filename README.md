@@ -1,3 +1,9 @@
+## Structure
+- There is a single `main.cpp` which parses CLI arguments and then selects the right subprogram based on those arguments.
+- CMake will build this into a single executable placed inside `build/`.
+- Each day is a folder inside `src/` with a single header file, so you can easily import the solver functions for each day by just including that single header file.
+- The inputs for each day are inside `inputs/`
+
 ## Setting up CMake
 In the source directory:
 ```
