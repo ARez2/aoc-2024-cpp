@@ -32,6 +32,11 @@ And to run Day 1, Part 2 with the example input:
 ./build/aoc 1 2 --example
 ```
 
+Combined command:
+```
+cmake --build build && ./build/aoc 1 2 --example
+```
+
 ## Usage of AI
 Since I used this AoC as an opportunity to improve my C++ skills, I did allow myself to use AI for general C++ questions, for example about syntax. I did **NOT** provide it the puzzle text or any information about advent of code. I used it **ONLY** for questions like:
 - *"How do I work with things like `vector.begin()` and `vector.end()` i.e. retrieve the value or move it forwards one step?"*
