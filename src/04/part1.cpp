@@ -35,10 +35,13 @@ struct SearchStatus {
         vertical_dir = ver_dir;
     }
 
+    /// @brief Returns true if the word has been found.
     bool is_complete() {
         return num_chars_found == word_to_find.length();
     }
 
+    /// @brief  Writes the (found) `word_to_find` into `matrix` where it was found.
+    /// @param matrix The string matrix to write into
     void mark_work_in_matrix(std::vector<std::string> &matrix) {
         if (!is_complete()) {
             return;
@@ -49,14 +52,11 @@ struct SearchStatus {
         int dy = (end.second > start.second) ? 1 : (end.second < start.second) ? -1 : 0;
         int x = start.first;
         int y = start.second;
-
         while (true) {
             matrix[y][x] = word_to_find[char_idx];
             char_idx++;
-
             if (x == end.first && y == end.second)
                 break;
-
             x += dx;
             y += dy;
         }
