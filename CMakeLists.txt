@@ -16,4 +16,6 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 )
 
 add_executable(aoc ${SOURCES})
+# Add files from "include/"
+target_include_directories(aoc PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_compile_options(aoc PRIVATE -Wall -Wextra -Wpedantic)
