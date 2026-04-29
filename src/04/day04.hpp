@@ -79,4 +79,4 @@ void search(const std::vector<std::string> &lines, Coord coord, SearchStatus &st
 /// @return Number of times the word was found
 template <ReadDir horizontal_dir, ReadDir vertical_dir>
 int find_num_word(const std::vector<std::string> &lines, std::string word,
-                  std::vector<std::string> &dbg_lines);
+                  std::vector<std::string> &dbg_lines, std::vector<SearchStatus> &results);

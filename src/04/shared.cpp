@@ -57,12 +57,13 @@ void search(const std::vector<std::string> &lines, Coord coord, SearchStatus &st
 /// @return Number of times the word was found
 template <ReadDir horizontal_dir, ReadDir vertical_dir>
 int find_num_word(const std::vector<std::string> &lines, std::string word,
-                  std::vector<std::string> &dbg_lines);
+                  std::vector<std::string> &dbg_lines, std::vector<SearchStatus> &results);
 
 template <>
 int find_num_word<ReadDir::POSITIVE, ReadDir::ZERO>(const std::vector<std::string> &lines,
                                                     std::string word,
-                                                    std::vector<std::string> &dbg_lines) {
+                                                    std::vector<std::string> &dbg_lines,
+                                                    std::vector<SearchStatus> &results) {
     int num_found = 0;
     for (int y = 0; y < lines.size(); y++) {
         SearchStatus status = SearchStatus(word, ReadDir::POSITIVE, ReadDir::ZERO);
@@ -71,6 +72,7 @@ int find_num_word<ReadDir::POSITIVE, ReadDir::ZERO>(const std::vector<std::strin
             if (status.is_complete()) {
                 num_found++;
                 DBG status.mark_work_in_matrix(dbg_lines);
+                results.push_back(status);
                 // Reset the status
                 status = SearchStatus(word, ReadDir::POSITIVE, ReadDir::ZERO);
             }
@@ -81,14 +83,16 @@ int find_num_word<ReadDir::POSITIVE, ReadDir::ZERO>(const std::vector<std::strin
 template <>
 int find_num_word<ReadDir::NEGATIVE, ReadDir::ZERO>(const std::vector<std::string> &lines,
                                                     std::string word,
-                                                    std::vector<std::string> &dbg_lines) {
+                                                    std::vector<std::string> &dbg_lines,
+                                                    std::vector<SearchStatus> &results) {
     std::reverse(word.begin(), word.end());
-    return find_num_word<ReadDir::POSITIVE, ReadDir::ZERO>(lines, word, dbg_lines);
+    return find_num_word<ReadDir::POSITIVE, ReadDir::ZERO>(lines, word, dbg_lines, results);
 }
 template <>
 int find_num_word<ReadDir::ZERO, ReadDir::POSITIVE>(const std::vector<std::string> &lines,
                                                     std::string word,
-                                                    std::vector<std::string> &dbg_lines) {
+                                                    std::vector<std::string> &dbg_lines,
+                                                    std::vector<SearchStatus> &results) {
     int num_found = 0;
     // ASSUMPTION: Each line has the same length
     for (int x = 0; x < lines[0].length(); x++) {
@@ -98,6 +102,7 @@ int find_num_word<ReadDir::ZERO, ReadDir::POSITIVE>(const std::vector<std::strin
             if (status.is_complete()) {
                 num_found++;
                 DBG status.mark_work_in_matrix(dbg_lines);
+                results.push_back(status);
                 // Reset the status
                 status = SearchStatus(word, ReadDir::ZERO, ReadDir::POSITIVE);
             }
@@ -108,14 +113,16 @@ int find_num_word<ReadDir::ZERO, ReadDir::POSITIVE>(const std::vector<std::strin
 template <>
 int find_num_word<ReadDir::ZERO, ReadDir::NEGATIVE>(const std::vector<std::string> &lines,
                                                     std::string word,
-                                                    std::vector<std::string> &dbg_lines) {
+                                                    std::vector<std::string> &dbg_lines,
+                                                    std::vector<SearchStatus> &results) {
     std::reverse(word.begin(), word.end());
-    return find_num_word<ReadDir::ZERO, ReadDir::POSITIVE>(lines, word, dbg_lines);
+    return find_num_word<ReadDir::ZERO, ReadDir::POSITIVE>(lines, word, dbg_lines, results);
 }
 template <>
 int find_num_word<ReadDir::POSITIVE, ReadDir::POSITIVE>(const std::vector<std::string> &lines,
                                                         std::string word,
-                                                        std::vector<std::string> &dbg_lines) {
+                                                        std::vector<std::string> &dbg_lines,
+                                                        std::vector<SearchStatus> &results) {
 
     int num_found = 0;
     // https://stackoverflow.com/a/1779242
@@ -128,6 +135,7 @@ int find_num_word<ReadDir::POSITIVE, ReadDir::POSITIVE>(const std::vector<std::s
             if (status.is_complete()) {
                 num_found++;
                 DBG status.mark_work_in_matrix(dbg_lines);
+                results.push_back(status);
                 // Reset the status
                 status = SearchStatus(word, ReadDir::POSITIVE, ReadDir::POSITIVE);
             }
@@ -138,15 +146,17 @@ int find_num_word<ReadDir::POSITIVE, ReadDir::POSITIVE>(const std::vector<std::s
 template <>
 int find_num_word<ReadDir::NEGATIVE, ReadDir::NEGATIVE>(const std::vector<std::string> &lines,
                                                         std::string word,
-                                                        std::vector<std::string> &dbg_lines) {
+                                                        std::vector<std::string> &dbg_lines,
+                                                        std::vector<SearchStatus> &results) {
     std::reverse(word.begin(), word.end());
-    return find_num_word<ReadDir::POSITIVE, ReadDir::POSITIVE>(lines, word, dbg_lines);
+    return find_num_word<ReadDir::POSITIVE, ReadDir::POSITIVE>(lines, word, dbg_lines, results);
 }
 
 template <>
 int find_num_word<ReadDir::NEGATIVE, ReadDir::POSITIVE>(const std::vector<std::string> &lines,
                                                         std::string word,
-                                                        std::vector<std::string> &dbg_lines) {
+                                                        std::vector<std::string> &dbg_lines,
+                                                        std::vector<SearchStatus> &results) {
 
     int num_found = 0;
     // https://stackoverflow.com/a/1779242
@@ -159,6 +169,7 @@ int find_num_word<ReadDir::NEGATIVE, ReadDir::POSITIVE>(const std::vector<std::s
             if (status.is_complete()) {
                 num_found++;
                 DBG status.mark_work_in_matrix(dbg_lines);
+                results.push_back(status);
                 // Reset the status
                 status = SearchStatus(word, ReadDir::NEGATIVE, ReadDir::POSITIVE);
             }
@@ -169,7 +180,8 @@ int find_num_word<ReadDir::NEGATIVE, ReadDir::POSITIVE>(const std::vector<std::s
 template <>
 int find_num_word<ReadDir::POSITIVE, ReadDir::NEGATIVE>(const std::vector<std::string> &lines,
                                                         std::string word,
-                                                        std::vector<std::string> &dbg_lines) {
+                                                        std::vector<std::string> &dbg_lines,
+                                                        std::vector<SearchStatus> &results) {
     std::reverse(word.begin(), word.end());
-    return find_num_word<ReadDir::NEGATIVE, ReadDir::POSITIVE>(lines, word, dbg_lines);
+    return find_num_word<ReadDir::NEGATIVE, ReadDir::POSITIVE>(lines, word, dbg_lines, results);
 }

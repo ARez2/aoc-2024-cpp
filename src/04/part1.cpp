@@ -9,14 +9,15 @@
 /// @return Number of times the word was found.
 int find_num_word_all(const std::vector<std::string> &lines, std::string word,
                       std::vector<std::string> &dbg_lines) {
-    return find_num_word<ReadDir::POSITIVE, ReadDir::ZERO>(lines, word, dbg_lines) +
-           find_num_word<ReadDir::NEGATIVE, ReadDir::ZERO>(lines, word, dbg_lines) +
-           find_num_word<ReadDir::ZERO, ReadDir::POSITIVE>(lines, word, dbg_lines) +
-           find_num_word<ReadDir::ZERO, ReadDir::NEGATIVE>(lines, word, dbg_lines) +
-           find_num_word<ReadDir::POSITIVE, ReadDir::POSITIVE>(lines, word, dbg_lines) +
-           find_num_word<ReadDir::NEGATIVE, ReadDir::NEGATIVE>(lines, word, dbg_lines) +
-           find_num_word<ReadDir::NEGATIVE, ReadDir::POSITIVE>(lines, word, dbg_lines) +
-           find_num_word<ReadDir::POSITIVE, ReadDir::NEGATIVE>(lines, word, dbg_lines);
+    std::vector<SearchStatus> results;
+    return find_num_word<ReadDir::POSITIVE, ReadDir::ZERO>(lines, word, dbg_lines, results) +
+           find_num_word<ReadDir::NEGATIVE, ReadDir::ZERO>(lines, word, dbg_lines, results) +
+           find_num_word<ReadDir::ZERO, ReadDir::POSITIVE>(lines, word, dbg_lines, results) +
+           find_num_word<ReadDir::ZERO, ReadDir::NEGATIVE>(lines, word, dbg_lines, results) +
+           find_num_word<ReadDir::POSITIVE, ReadDir::POSITIVE>(lines, word, dbg_lines, results) +
+           find_num_word<ReadDir::NEGATIVE, ReadDir::NEGATIVE>(lines, word, dbg_lines, results) +
+           find_num_word<ReadDir::NEGATIVE, ReadDir::POSITIVE>(lines, word, dbg_lines, results) +
+           find_num_word<ReadDir::POSITIVE, ReadDir::NEGATIVE>(lines, word, dbg_lines, results);
 }
 
 int day04_part1(const std::string &input) {
