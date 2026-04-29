@@ -1,4 +1,4 @@
-int test = 1;
+#pragma once
 
 #ifdef DEBUG
 #define DBG
