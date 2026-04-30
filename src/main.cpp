@@ -2,6 +2,7 @@
 #include "02/day02.hpp"
 #include "03/day03.hpp"
 #include "04/day04.hpp"
+#include "05/day05.hpp"
 
 #include <format>
 #include <fstream>
@@ -18,9 +19,9 @@ using Solver = std::function<int(const std::string &)>;
 // Maps day nr + part nr to a function so that we dont need
 // an endless if/switch statement
 std::map<std::pair<int, int>, Solver> solvers = {
-    {{1, 1}, day01_part1}, {{1, 2}, day01_part2}, {{2, 1}, day02_part1},
-    {{2, 2}, day02_part2}, {{3, 1}, day03_part1}, {{3, 2}, day03_part2},
-    {{4, 1}, day04_part1}, {{4, 2}, day04_part2},
+    {{1, 1}, day01_part1}, {{1, 2}, day01_part2}, {{2, 1}, day02_part1}, {{2, 2}, day02_part2},
+    {{3, 1}, day03_part1}, {{3, 2}, day03_part2}, {{4, 1}, day04_part1}, {{4, 2}, day04_part2},
+    {{5, 1}, day05_part1}, {{5, 2}, day05_part2},
 };
 
 std::string read_file(const std::string &path) {
@@ -46,8 +47,8 @@ int main(int argc, char **argv) {
 
         std::pair<int, int> key = std::make_pair(day, part);
         if (day >= 1 && solvers.count(key) > 0) {
-            std::string input_path = std::format("inputs/day{:02}{}.txt", day,
-                                                 example ? "_example" : "");
+            std::string input_path =
+                std::format("inputs/day{:02}{}.txt", day, example ? "_example" : "");
             std::string input = read_file(input_path);
             int result = solvers[key](input);
             std::cout << "Puzzle output: " << result << "\n";
