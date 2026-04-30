@@ -11,8 +11,7 @@ typedef std::pair<Vertex, Vertex> Edge;
 typedef std::map<Vertex, std::list<Vertex>> AdjacencyList;
 
 class Graph {
-    u_int num_vertices;
-    u_int num_edges;
+    int num_vertices, num_edges;
 
     AdjacencyList adj;
     std::map<Edge, int> costs;
@@ -41,8 +40,8 @@ class Graph {
         }
     }
 
-    u_int get_num_vertices() {
-        return adj.size();
+    int get_num_vertices() {
+        return (int)adj.size();
     }
 
     std::vector<Vertex> get_vertices() {
