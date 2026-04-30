@@ -3,6 +3,7 @@
 #include "03/day03.hpp"
 #include "04/day04.hpp"
 #include "05/day05.hpp"
+#include "06/day06.hpp"
 
 #include <format>
 #include <fstream>
@@ -21,8 +22,7 @@ using Solver = std::function<int(const std::string &)>;
 std::map<std::pair<int, int>, Solver> solvers = {
     {{1, 1}, day01_part1}, {{1, 2}, day01_part2}, {{2, 1}, day02_part1}, {{2, 2}, day02_part2},
     {{3, 1}, day03_part1}, {{3, 2}, day03_part2}, {{4, 1}, day04_part1}, {{4, 2}, day04_part2},
-    {{5, 1}, day05_part1}, {{5, 2}, day05_part2},
-};
+    {{5, 1}, day05_part1}, {{5, 2}, day05_part2}, {{6, 1}, day06_part1}, {{6, 2}, day06_part2}};
 
 std::string read_file(const std::string &path) {
     std::ifstream file(path);
