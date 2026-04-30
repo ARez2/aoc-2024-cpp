@@ -79,7 +79,7 @@ int day04_part2(const std::string &input) {
     std::vector<std::string> dbg_lines2 = dbg_lines;
 
     std::vector<SearchStatus> results;
-    int total_num_mas = find_num_word_diag(lines, "MAS", dbg_lines, results);
+    int _ = find_num_word_diag(lines, "MAS", dbg_lines, results);
     std::vector<SearchStatus> verified_result = validate_x_mas_results(results, dbg_lines2);
     // Since we need to find "an X-MAS" (so 2x "MAS" together), divide the result by two
     int total_num_x_mas = verified_result.size() / 2;

@@ -65,9 +65,9 @@ int find_num_word<ReadDir::POSITIVE, ReadDir::ZERO>(const std::vector<std::strin
                                                     std::vector<std::string> &dbg_lines,
                                                     std::vector<SearchStatus> &results) {
     int num_found = 0;
-    for (int y = 0; y < lines.size(); y++) {
+    for (size_t y = 0; y < lines.size(); y++) {
         SearchStatus status = SearchStatus(word, ReadDir::POSITIVE, ReadDir::ZERO);
-        for (int x = 0; x < lines[y].length(); x++) {
+        for (size_t x = 0; x < lines[y].length(); x++) {
             search(lines, Coord(x, y), status);
             if (status.is_complete()) {
                 num_found++;
@@ -95,9 +95,9 @@ int find_num_word<ReadDir::ZERO, ReadDir::POSITIVE>(const std::vector<std::strin
                                                     std::vector<SearchStatus> &results) {
     int num_found = 0;
     // ASSUMPTION: Each line has the same length
-    for (int x = 0; x < lines[0].length(); x++) {
+    for (size_t x = 0; x < lines[0].length(); x++) {
         SearchStatus status = SearchStatus(word, ReadDir::ZERO, ReadDir::POSITIVE);
-        for (int y = 0; y < lines.size(); y++) {
+        for (size_t y = 0; y < lines.size(); y++) {
             search(lines, Coord(x, y), status);
             if (status.is_complete()) {
                 num_found++;

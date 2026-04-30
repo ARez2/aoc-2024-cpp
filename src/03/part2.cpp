@@ -22,8 +22,8 @@ int day03_part2(const std::string &input) {
     // As defined in the puzzle text: Each input starts with an implicit "do()"
     std::vector<int> do_positions = {0};
     // Iterate all do_regex matches
-    for (std::sregex_iterator i(input.begin(), input.end(), do_regex);
-         i != std::sregex_iterator(); ++i) {
+    for (std::sregex_iterator i(input.begin(), input.end(), do_regex); i != std::sregex_iterator();
+         ++i) {
         do_positions.push_back((*i).position());
     }
     std::vector<int> dont_positions;
@@ -68,7 +68,7 @@ int day03_part2(const std::string &input) {
     // OR
     // - the range ends at a dont() pos and there are no more do() instructions
     //   (meaning last instruction was a dont())
-    while (next_range_end < input.length() &&
+    while ((size_t)next_range_end < input.length() &&
            !(cur_dont_pos > cur_do_pos && do_iter == do_iter_end)) {
         // while there is do()'s before the dont(), skip those, as enabling
         // mul's while already enabled does nothing
@@ -104,14 +104,13 @@ int day03_part2(const std::string &input) {
             next_range_end = cur_dont_pos;
         }
         // (using designated initializers for the struct here)
-        enabled_ranges.push_back(
-            Range{.start = next_range_start, .end = next_range_end});
+        enabled_ranges.push_back(Range{.start = next_range_start, .end = next_range_end});
     }
 
     int total_result = 0;
     // Iterate all mul_regex matches
-    for (std::sregex_iterator i(input.begin(), input.end(), mul_regex);
-         i != std::sregex_iterator(); ++i) {
+    for (std::sregex_iterator i(input.begin(), input.end(), mul_regex); i != std::sregex_iterator();
+         ++i) {
         std::smatch match = *i;
         int mul_position = match.position();
 

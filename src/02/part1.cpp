@@ -19,7 +19,7 @@ bool is_sequence_safe(std::vector<int> &seq) {
     bool seq_safe = true;
     SequenceState seq_state = SequenceState::UNSET;
 
-    for (int i = 0; i < seq.size() - 1; i++) {
+    for (size_t i = 0; i < seq.size() - 1; i++) {
         int current_num = seq[i];
         int next_num = seq[i + 1];
         int diff = next_num - current_num;
@@ -40,8 +40,7 @@ bool is_sequence_safe(std::vector<int> &seq) {
                 seq_state == SequenceState::DECREASING && sign(diff) >= 0;
             // in this case, the sequence was increasing but this step
             // decreased.
-            bool violates_increasing_seq =
-                seq_state == SequenceState::INCREASING && sign(diff) < 0;
+            bool violates_increasing_seq = seq_state == SequenceState::INCREASING && sign(diff) < 0;
             if (violates_decreasing_seq || violates_increasing_seq) {
                 seq_safe = false;
                 break;
